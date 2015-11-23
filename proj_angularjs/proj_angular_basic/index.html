@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html ng-app >
+
+<head>
+    <meta charset="utf-8">
+    <title>Google Phone Gallery</title>
+
+    <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="controller.js"></script>
+
+</head>
+<body ng-controller="PhoneListController">
+
+    <!-- 입력된 내용은 searchKeyword 라는 모델에 자동-->
+    검색 :
+    <input type="text" ng-model="searchKeyword"/>
+
+    <!-- orderProperty 라는 임의의 이름으로 정렬 순서를 정해줄 앵귤러 모델-->
+    정렬 :
+    <select ng-model="orderProperty">
+        <option value="name" selected>이름</option>
+        <option value="snippet">설명</option>
+        <option value="no">번호</option>
+    </select>
+
+    <ul>
+        <li ng-repeat="phone in phones | filter:searchKeyword | orderBy:orderProperty">
+            번호 : {{phone.no}}<br />
+            이름 : {{phone.name}}<br />
+            설명 : {{phone.snippet}}
+        </li>
+    </ul>
+
+    <p>
+        현재 검색 키워드 : {{searchKeyword || '없음'}}<br />
+        현재 정렬 기준 : {{orderProperty}}
+    </p>
+</body>
+</html>
